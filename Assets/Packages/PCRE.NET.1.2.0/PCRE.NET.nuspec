@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>PCRE.NET</id>
+    <version>1.2.0</version>
+    <title>PCRE.NET - Perl Compatible Regular Expressions for .NET</title>
+    <authors>Philip Hazel,Zoltan Herczeg,Lucas Trzesniewski</authors>
+    <license type="expression">BSD-3-Clause</license>
+    <licenseUrl>https://licenses.nuget.org/BSD-3-Clause</licenseUrl>
+    <icon>icon.png</icon>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/ltrzesniewski/pcre-net</projectUrl>
+    <iconUrl>https://github.com/ltrzesniewski/pcre-net/raw/master/icon.png</iconUrl>
+    <description>PCRE.NET is a .NET wrapper for the PCRE library. The goal of this project is to bring most of PCRE's features for use from .NET applications with as little overhead as possible.</description>
+    <copyright>Copyright © Lucas Trzesniewski 2014-2025</copyright>
+    <tags>PCRE.NET PCRE Perl Regex Regexp Regular-Expressions Text</tags>
+    <repository type="git" url="https://github.com/ltrzesniewski/pcre-net" commit="2ac946f3d633fbb278545948611bf3872460d94e" />
+    <dependencies>
+      <group targetFramework="net5.0" />
+      <group targetFramework="net9.0" />
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="System.Memory" version="4.6.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

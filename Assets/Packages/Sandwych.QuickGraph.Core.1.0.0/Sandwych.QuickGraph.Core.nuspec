@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Sandwych.QuickGraph.Core</id>
+    <version>1.0.0</version>
+    <title>Generic Graph Data Structures and Algorithms for .NET(.NET Standard and .NET Framework)</title>
+    <authors>Peli de Halleux, Wei Li</authors>
+    <owners>Peli de Halleux, Wei Li</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/oldrev/Sandwych.QuickGraph/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/oldrev/Sandwych.QuickGraph</projectUrl>
+    <description>Sandwych.QuickGraph is a port of the awesome QuickGraph to .NET Standard, it provides generic directed/undirected graph datastructures and algorithms for .NET.</description>
+    <copyright>Copyright (C) Jonathan "Peli" de Halleux</copyright>
+    <tags>graph topologic quickgraph</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="System.Diagnostics.Contracts" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard1.6">
+        <dependency id="NETStandard.Library" version="1.6.1" exclude="Build,Analyzers" />
+        <dependency id="System.Diagnostics.Contracts" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="System.Diagnostics.Contracts" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

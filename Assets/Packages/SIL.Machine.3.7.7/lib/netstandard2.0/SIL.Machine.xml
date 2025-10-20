@@ -1,0 +1,1118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SIL.Machine</name>
+    </assembly>
+    <members>
+        <member name="P:SIL.Machine.Annotations.Annotation`1.Optional">
+            <summary>
+            Gets or sets a value indicating whether this annotation is optional.
+            </summary>
+            <value>
+            	<c>true</c> if this annotation is optional, otherwise <c>false</c>.
+            </value>
+        </member>
+        <member name="T:SIL.Machine.Corpora.IUsfmParserHandler">
+            <summary>
+            Interface for USFM parsing events.
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.StartUsfm(SIL.Machine.Corpora.UsfmParserState)">
+            <summary>
+            Start of the USFM
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.EndUsfm(SIL.Machine.Corpora.UsfmParserState)">
+            <summary>
+            End of the USFM
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.GotMarker(SIL.Machine.Corpora.UsfmParserState,System.String)">
+            <summary>
+            Got a marker of any kind
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.StartBook(SIL.Machine.Corpora.UsfmParserState,System.String,System.String)">
+            <summary>
+            Start of a book element
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.EndBook(SIL.Machine.Corpora.UsfmParserState,System.String)">
+            <summary>
+            End of a book element, not the end of the entire book.
+            Book element contains the description as text
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.Chapter(SIL.Machine.Corpora.UsfmParserState,System.String,System.String,System.String,System.String)">
+            <summary>
+            Chapter element
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.Verse(SIL.Machine.Corpora.UsfmParserState,System.String,System.String,System.String,System.String)">
+            <summary>
+            Verse element
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.StartPara(SIL.Machine.Corpora.UsfmParserState,System.String,System.Boolean,System.Collections.Generic.IReadOnlyList{SIL.Machine.Corpora.UsfmAttribute})">
+            <summary>
+            Start of a paragraph
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.EndPara(SIL.Machine.Corpora.UsfmParserState,System.String)">
+            <summary>
+            End of a paragraph
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.StartChar(SIL.Machine.Corpora.UsfmParserState,System.String,System.Boolean,System.Collections.Generic.IReadOnlyList{SIL.Machine.Corpora.UsfmAttribute})">
+            <summary>
+            Start of a character style
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.EndChar(SIL.Machine.Corpora.UsfmParserState,System.String,System.Collections.Generic.IReadOnlyList{SIL.Machine.Corpora.UsfmAttribute},System.Boolean)">
+            <summary>
+            End of a character style
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.StartNote(SIL.Machine.Corpora.UsfmParserState,System.String,System.String,System.String)">
+            <summary>
+            Start of a note
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.EndNote(SIL.Machine.Corpora.UsfmParserState,System.String,System.Boolean)">
+            <summary>
+            End of a note
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.StartTable(SIL.Machine.Corpora.UsfmParserState)">
+            <summary>
+            Start of a table
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.EndTable(SIL.Machine.Corpora.UsfmParserState)">
+            <summary>
+            End of a table
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.StartRow(SIL.Machine.Corpora.UsfmParserState,System.String)">
+            <summary>
+            Start of a row of a table
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.EndRow(SIL.Machine.Corpora.UsfmParserState,System.String)">
+            <summary>
+            End of a row of a table
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.StartCell(SIL.Machine.Corpora.UsfmParserState,System.String,System.String,System.Int32)">
+            <summary>
+            Start of a cell within a table row
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.EndCell(SIL.Machine.Corpora.UsfmParserState,System.String)">
+            <summary>
+            End of a cell within a table row
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.Text(SIL.Machine.Corpora.UsfmParserState,System.String)">
+            <summary>
+            Text element
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.Unmatched(SIL.Machine.Corpora.UsfmParserState,System.String)">
+            <summary>
+            Unmatched end marker
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.Ref(SIL.Machine.Corpora.UsfmParserState,System.String,System.String,System.String)">
+            <summary>
+            Automatically extracted ref to a Scripture location
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.StartSidebar(SIL.Machine.Corpora.UsfmParserState,System.String,System.String)">
+            <summary>
+            Start of a study Bible sidebar
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.EndSidebar(SIL.Machine.Corpora.UsfmParserState,System.String,System.Boolean)">
+            <summary>
+            End of a study Bible sidebar
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.OptBreak(SIL.Machine.Corpora.UsfmParserState)">
+            <summary>
+            Optional break (// in usfm)
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.IUsfmParserHandler.Milestone(SIL.Machine.Corpora.UsfmParserState,System.String,System.Boolean,System.Collections.Generic.IReadOnlyList{SIL.Machine.Corpora.UsfmAttribute})">
+            <summary>
+            Milestone start or end
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.ParatextProjectTermsParserBase.StripParens(System.String,System.Char,System.Char)">
+            <summary>
+            Strips all content between left and right parentheses "left" and "right" and returns resultant string
+            </summary>
+            <param name="termString">The string to be modified</param>
+            <param name="left">The desired left parenthesis char e.g. [,{,(, etc.</param>
+            <param name="right">The desired right parenthesis char e.g. ],},) etc.</param>
+            <returns>String stripped of content between parentheses</returns>
+        </member>
+        <member name="T:SIL.Machine.Corpora.ScriptureRef">
+            A reference to a specific text segment in a scripture text. A verse reference is a the primary anchor point for
+            each text segment. If the text segment is not in a verse, then a path is used to specify the location of the
+            segment within the verse. A path element consists of the position with the parent and a name. The position is
+            1-based. The position 0 is used when a position is not specified or unknown. The reference is serialized in the
+            following format: "[verse reference]/[path element 1]/[path element 2]/...". A path element is serialized as
+            "[position]:[name]". For example, the reference for the section header that occurs directly after MAT 1:1 would
+            be represented as "MAT 1:1/1:s". Introductory material that occurs at the beginning of a book before the first
+            verse is referenced by the "1:0" verse reference. Some non-verse text segments can be nested in another element.
+            For example, a table cell might be represented as "MAT 1:1/1:tr/1:tc1".
+        </member>
+        <member name="M:SIL.Machine.Corpora.UpdateUsfmParserHandler.#ctor(System.Collections.Generic.IReadOnlyList{SIL.Machine.Corpora.UpdateUsfmRow},System.String,SIL.Machine.Corpora.UpdateUsfmTextBehavior,SIL.Machine.Corpora.UpdateUsfmMarkerBehavior,SIL.Machine.Corpora.UpdateUsfmMarkerBehavior,SIL.Machine.Corpora.UpdateUsfmMarkerBehavior,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{SIL.Machine.Corpora.IUsfmUpdateBlockHandler},System.Collections.Generic.IEnumerable{System.String},System.Func{SIL.Machine.Corpora.UsfmUpdateBlockHandlerException,System.Boolean},System.Boolean)">
+            <param name="rows">UpdateUsfmRows must be in order</param>
+        </member>
+        <member name="T:SIL.Machine.Corpora.UsfmParser">
+             <summary>
+             Parser for USFM. Sends parse information to an optional sink.
+             The parser parses one token at a time, looking ahead as necessary
+             for such elements as figures, links and alternate verses and chapters.
+            
+             The parser first updates the UsfmParserState and then calls the
+             parser handler as necessary.
+             </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParser.State">
+            <summary>
+            Gets the current parser state. Note: Will change with each token parsed
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.UsfmParser.ProcessTokens">
+            <summary>
+            Processes all tokens
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.UsfmParser.ProcessToken">
+            <summary>
+            Processes a single token
+            </summary>
+            <returns>false if there were no more tokens process</returns>
+        </member>
+        <member name="M:SIL.Machine.Corpora.UsfmParser.CloseAll">
+            <summary>
+            Closes all open elements on stack
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.UsfmParser.DetermineUnknownTokenType">
+            <summary>
+            Determine type that an unknown token should be treated as
+            </summary>
+            <returns>character or paragraph type</returns>
+        </member>
+        <member name="T:SIL.Machine.Corpora.UsfmParserState">
+            <summary>
+            Class for maintaining the state when parsing scripture.
+            Maintains the current verse reference, paragraph, character and note styles.
+            Note that book of verse reference is not updated unless blank
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.Tokens">
+            <summary>
+            USFM tokens
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.Index">
+            <summary>
+            Returns index of current token
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.Token">
+            <summary>
+            Returns current token
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.PrevToken">
+            <summary>
+            Returns previous token
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.Stack">
+            <summary>
+            Stack of elements that are open
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.VerseRef">
+            <summary>
+            Current verse reference
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.VerseOffset">
+            <summary>
+            Offset of start of token in verse
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.SpecialToken">
+            <summary>
+            True if the token processed is part of a special indivisible group
+            of tokens (link or chapter/verse alternate/publishable)
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.SpecialTokenCount">
+            <summary>
+            Number of tokens to skip over because have been processed in advance
+            (i.e. for figures which are three tokens, or links, or chapter/verse alternates)
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.ChapterHasVerseZero">
+            <summary>
+            <c>true</c> if a chapter has verse 0 specified.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.IsFigure">
+            <summary>
+            True if the token processed is a figure.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.ParaTag">
+            <summary>
+            Current paragraph tag or null for none.
+            Note that book and table rows are considered paragraphs for legacy checking reasons.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.CharTag">
+            <summary>
+            Innermost character tag or null for none
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.NoteTag">
+            <summary>
+            Current note tag or null for none
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.CharTags">
+            <summary>
+            Character tags, starting with innermost
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.IsVerseText">
+            <summary>
+            Determines if text tokens in the current state are verse text
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Corpora.UsfmParserState.IsSpecialText">
+            <summary>
+            Determines if text is special text like links and figures that are not in the vernacular.
+            </summary>
+        </member>
+        <member name="T:SIL.Machine.Corpora.UsfmElementType">
+            <summary>
+            Element types on the stack
+            </summary>
+        </member>
+        <member name="T:SIL.Machine.Corpora.UsfmParserElement">
+            <summary>
+            Element that can be on the parser stack
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.UsfmTokenizer.GetNextWord(System.String,System.Int32@,System.Boolean)">
+            <summary>
+            Gets the next word in the usfm and advances the index past it
+            </summary>
+            <param name="usfm"></param>
+            <param name="index"></param>
+            <param name="preserveWhitespace">true to preserve all whitespace in tokens</param>
+            <returns></returns>
+        </member>
+        <member name="M:SIL.Machine.Corpora.UsfmTokenizer.RegularizeSpaces(System.String)">
+            <summary>
+            Converts all control characters, carriage returns and tabs into
+            spaces, and then strips duplicate spaces.
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Corpora.UsfmTokenizer.IsNonSemanticWhiteSpace(System.Char)">
+            <summary>
+            Checks if is whitespace, but not U+3000 (IDEOGRAPHIC SPACE).
+            Note: ~ is not included as it is considered punctuation, not whitespace for simplicity.
+            </summary>
+            <param name="c">character</param>
+            <returns>true if non-meaningful whitespace</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.BidirListNode`1.GetNext(SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the next node in the owning linked list according to the
+            specified direction.
+            </summary>
+            <param name="dir">The direction</param>
+            <returns>The next node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.BidirListNode`1.GetPrev(SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the previous node in the owning linked list according to the
+            specified direction.
+            </summary>
+            <param name="dir">The direction</param>
+            <returns>The previous node.</returns>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.IBidirList`1.First">
+            <summary>
+            Gets the first node in this list.
+            </summary>
+            <value>The first node.</value>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.IBidirList`1.Last">
+            <summary>
+            Gets the last node in this list.
+            </summary>
+            <value>The last node.</value>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirList`1.GetFirst(SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the first node in this list according to the specified direction.
+            </summary>
+            <param name="dir">The direction.</param>
+            <returns>The first node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirList`1.GetLast(SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the last node in this list according to the specified direction.
+            </summary>
+            <param name="dir">The direction.</param>
+            <returns>The last node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirList`1.GetNext(`0)">
+            <summary>
+            Gets the node after the specified node.
+            </summary>
+            <param name="cur">The current node.</param>
+            <returns>The next node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirList`1.GetNext(`0,SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the node after the specified node according to the specified direction.
+            </summary>
+            <param name="cur">The current node.</param>
+            <param name="dir">The direction.</param>
+            <returns>The next node.</returns>
+            <exception cref="T:System.ArgumentException">Thrown when the specified node is not owned by this linked list.</exception>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirList`1.GetPrev(`0)">
+            <summary>
+            Gets the node before the specified node.
+            </summary>
+            <param name="cur">The current node.</param>
+            <returns>The previous node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirList`1.GetPrev(`0,SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the node before the specified node according to the specified direction.
+            </summary>
+            <param name="cur">The current node.</param>
+            <param name="dir">The direction.</param>
+            <returns>The previous node.</returns>
+            <exception cref="T:System.ArgumentException">Thrown when the specified node is not owned by this linked list.</exception>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirList`1.Find(`0,`0@)">
+            <summary>
+            Finds the node that matches the specified example node.
+            </summary>
+            <param name="example">The example node.</param>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirList`1.Find(`0,`0,`0@)">
+            <summary>
+            Finds the node that matches the specified example node.
+            </summary>
+            <param name="start">The node to start searching from.</param>
+            <param name="example">The example node.</param>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirList`1.Find(`0,SIL.Machine.DataStructures.Direction,`0@)">
+            <summary>
+            Finds the node that matches the specified example node.
+            </summary>
+            <param name="example">The example node.</param>
+            <param name="dir">The direction.</param>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirList`1.Find(`0,`0,SIL.Machine.DataStructures.Direction,`0@)">
+            <summary>
+            Finds the node that matches the specified example node.
+            </summary>
+            <param name="start">The node to start searching from.</param>
+            <param name="example">The example node.</param>
+            <param name="dir">The direction.</param>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.IBidirListNode`1.Next">
+            <summary>
+            Gets the next node in the owning linked list.
+            </summary>
+            <value>The next node.</value>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.IBidirListNode`1.Prev">
+            <summary>
+            Gets the previous node in the owning linked list.
+            </summary>
+            <value>The previous node.</value>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirListNode`1.GetNext(SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the next node in the owning linked list according to the
+            specified direction.
+            </summary>
+            <param name="dir">The direction</param>
+            <returns>The next node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirListNode`1.GetPrev(SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the previous node in the owning linked list according to the
+            specified direction.
+            </summary>
+            <param name="dir">The direction</param>
+            <returns>The previous node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.IBidirListNode`1.Remove">
+            <summary>
+            Removes this node from the owning linked list.
+            </summary>
+            <returns><c>true</c> if the node is a member of a linked list, otherwise <c>false</c></returns>
+        </member>
+        <member name="T:SIL.Machine.DataStructures.OrderedBidirList`1">
+            <summary>
+            This is a bi-directional list. It is optimized for list traversal in either direction.
+            </summary>
+            <typeparam name="TNode">Item Type, must be the type of the class that the linked list handles.</typeparam>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirList`1.Add(`0)">
+            <summary>
+            Adds the specified node to the end of this list.
+            </summary>
+            <param name="node">The node.</param>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirList`1.Remove(`0)">
+            <summary>
+            Removes the specified node from this list.
+            </summary>
+            <param name="node">The node.</param>
+            <returns><c>true</c> if <c>node</c> is a member of this list, otherwise <c>false</c></returns>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.OrderedBidirList`1.First">
+            <summary>
+            Gets the first node in this list.
+            </summary>
+            <value>The first node.</value>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.OrderedBidirList`1.Last">
+            <summary>
+            Gets the last node in this list.
+            </summary>
+            <value>The last node.</value>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirList`1.GetFirst(SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the first node in this list according to the specified direction.
+            </summary>
+            <param name="dir">The direction.</param>
+            <returns>The first node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirList`1.GetLast(SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the last node in this list according to the specified direction.
+            </summary>
+            <param name="dir">The direction.</param>
+            <returns>The last node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirList`1.GetNext(`0)">
+            <summary>
+            Gets the node after the specified node.
+            </summary>
+            <param name="cur">The current node.</param>
+            <returns>The next node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirList`1.GetNext(`0,SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the node after the specified node according to the specified direction.
+            </summary>
+            <param name="cur">The current node.</param>
+            <param name="dir">The direction.</param>
+            <returns>The next node.</returns>
+            <exception cref="T:System.ArgumentException">Thrown when the specified node is not owned by this linked list.</exception>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirList`1.GetPrev(`0)">
+            <summary>
+            Gets the node before the specified node.
+            </summary>
+            <param name="cur">The current node.</param>
+            <returns>The previous node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirList`1.GetPrev(`0,SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the node before the specified node according to the specified direction.
+            </summary>
+            <param name="cur">The current node.</param>
+            <param name="dir">The direction.</param>
+            <returns>The previous node.</returns>
+            <exception cref="T:System.ArgumentException">Thrown when the specified node is not owned by this linked list.</exception>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirList`1.AddAfter(`0,`0,SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Inserts <c>newNode</c> to the left or right of <c>node</c>.
+            </summary>
+            <param name="node">The current node.</param>
+            <param name="newNode">The new node.</param>
+            <param name="dir">The direction to insert the new node.</param>
+            <exception cref="T:System.ArgumentException">Thrown when the specified node is not owned by this linked list.</exception>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirList`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds all of the nodes from the enumerable collection.
+            </summary>
+            <param name="e">The enumerable collection.</param>
+        </member>
+        <member name="T:SIL.Machine.DataStructures.OrderedBidirListNode`1">
+            <summary>
+            This is an abstract class that all bi-directional linked list nodes must extend. Having to specify the type
+            of the class that extends this class is a little weird, but it allows us to have strongly-typed
+            methods in the node class that can manipulate the owning linked list.
+            </summary>
+            <typeparam name="TNode">Item Type, must be the type of the class that extends this class.</typeparam>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.OrderedBidirListNode`1.List">
+            <summary>
+            Gets the linked list that owns this record.
+            </summary>
+            <value>The owning linked list.</value>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.OrderedBidirListNode`1.Next">
+            <summary>
+            Gets the next node in the owning linked list.
+            </summary>
+            <value>The next node.</value>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.OrderedBidirListNode`1.Prev">
+            <summary>
+            Gets the previous node in the owning linked list.
+            </summary>
+            <value>The previous node.</value>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirListNode`1.GetNext(SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the next node in the owning linked list according to the
+            specified direction.
+            </summary>
+            <param name="dir">The direction</param>
+            <returns>The next node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirListNode`1.GetPrev(SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Gets the previous node in the owning linked list according to the
+            specified direction.
+            </summary>
+            <param name="dir">The direction</param>
+            <returns>The previous node.</returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirListNode`1.Remove">
+            <summary>
+            Removes this node from the owning linked list.
+            </summary>
+            <returns><c>true</c> if the node is a member of a linked list, otherwise <c>false</c></returns>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.OrderedBidirListNode`1.AddAfter(`0,SIL.Machine.DataStructures.Direction)">
+            <summary>
+            Inserts the specified node to the right or left of this node.
+            </summary>
+            <param name="newNode">The new node.</param>
+            <param name="dir">The direction to insert the node.</param>
+        </member>
+        <member name="T:SIL.Machine.DataStructures.PriorityQueue`1">
+            <summary>
+            An implementation of a min-Priority Queue using a heap.  Has O(1) .Contains()!
+            </summary>
+            <typeparam name="T">The values in the queue.  Must extend the FastPriorityQueueNode class</typeparam>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.PriorityQueue`1.Count">
+            <summary>
+            Returns the number of nodes in the queue.
+            O(1)
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.PriorityQueue`1.Capacity">
+            <summary>
+            Returns the total number of items the internal data structure can hold without resizing.
+            O(1)
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.PriorityQueue`1.Clear">
+            <summary>
+            Removes every node from the queue.
+            O(n) (So, don't do this often!)
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.PriorityQueue`1.Contains(`0)">
+            <summary>
+            Returns (in O(1)!) whether the given node is in the queue.
+            O(1)
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.PriorityQueue`1.Enqueue(`0)">
+            <summary>
+            Enqueue a node to the priority queue.  Lower values are placed in front. Ties are broken arbitrarily.
+            If the queue is full, the result is undefined.
+            If the node is already enqueued, the result is undefined.
+            O(log n)
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.PriorityQueue`1.HasHigherPriority(`0,`0)">
+            <summary>
+            Returns true if 'higher' has higher priority than 'lower', false otherwise.
+            Note that calling HasHigherPriority(node, node) (ie. both arguments the same node) will return false
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.PriorityQueue`1.HasHigherOrEqualPriority(`0,`0)">
+            <summary>
+            Returns true if 'higher' has higher priority than 'lower', false otherwise.
+            Note that calling HasHigherOrEqualPriority(node, node) (ie. both arguments the same node) will return true
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.PriorityQueue`1.Dequeue">
+            <summary>
+            Removes the head of the queue and returns it.
+            If queue is empty, result is undefined
+            O(log n)
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.PriorityQueue`1.TrimExcess">
+            <summary>
+            Sets the capacity to the actual number of elements in the PriorityQueue, if that number is less than a
+            threshold value.
+            O(n)
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.PriorityQueue`1.Peek">
+            <summary>
+            Returns the head of the queue, without removing it (use Dequeue() for that).
+            If the queue is empty, behavior is undefined.
+            O(1)
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.PriorityQueue`1.UpdatePriority(`0)">
+            <summary>
+            This method must be called on a node every time its priority changes while it is in the queue.
+            <b>Forgetting to call this method will result in a corrupted queue!</b>
+            Calling this method on a node not in the queue results in undefined behavior.
+            O(log n)
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.PriorityQueue`1.Remove(`0)">
+            <summary>
+            Removes a node from the queue.  The node does not need to be the head of the queue.
+            If the node is not in the queue, the result is undefined.  If unsure, check Contains() first
+            O(log n)
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.DataStructures.PriorityQueue`1.IsValidQueue">
+            <summary>
+            <b>Should not be called in production code.</b>
+            Checks to make sure the queue is still in a valid state.  Used for testing/debugging the queue.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.PriorityQueueNode`2.Priority">
+            <summary>
+            The Priority to insert this node at.  Must be set BEFORE adding a node to the queue (ideally just once,
+            in the node's constructor).
+            Should not be manually edited once the node has been enqueued - use queue.UpdatePriority() instead.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.DataStructures.PriorityQueueNodeBase.QueueIndex">
+            <summary>
+            Represents the current position in the queue
+            </summary>
+        </member>
+        <member name="T:SIL.Machine.FeatureModel.Feature">
+            <summary>
+            This class represents a feature.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.FeatureModel.Feature.DefaultValue">
+            <summary>
+            Gets all default values.
+            </summary>
+            <value>The default values.</value>
+        </member>
+        <member name="M:SIL.Machine.FeatureModel.FeatureStruct.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SIL.Machine.FeatureModel.FeatureStruct"/> class.
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.FeatureModel.FeatureStruct.#ctor(SIL.Machine.FeatureModel.FeatureStruct,System.Collections.Generic.IDictionary{SIL.Machine.FeatureModel.FeatureValue,SIL.Machine.FeatureModel.FeatureValue})">
+            <summary>
+            Copy constructor.
+            </summary>
+            <param name="other">The fs.</param>
+            <param name="copies"></param>
+        </member>
+        <member name="P:SIL.Machine.FeatureModel.FeatureStruct.Features">
+            <summary>
+            Gets the features.
+            </summary>
+            <value>The features.</value>
+        </member>
+        <member name="M:SIL.Machine.FeatureModel.FeatureStruct.AddValue(SIL.Machine.FeatureModel.Feature,SIL.Machine.FeatureModel.FeatureValue)">
+            <summary>
+            Adds the specified feature-value pair.
+            </summary>
+            <param name="feature">The feature.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:SIL.Machine.FeatureModel.FeatureStruct.GetValue(SIL.Machine.FeatureModel.Feature)">
+            <summary>
+            Gets the values for the specified feature.
+            </summary>
+            <param name="feature">The feature.</param>
+            <returns>All values.</returns>
+        </member>
+        <member name="M:SIL.Machine.FeatureModel.FeatureStruct.IsUnifiable(SIL.Machine.FeatureModel.FeatureStruct,System.Boolean,SIL.Machine.FeatureModel.VariableBindings)">
+            <summary>
+            Determines whether the specified set of feature values is compatible with this
+            set of feature values. It is much like <c>Matches</c> except that if a the
+            specified set does not contain a feature in this set, it is still a match.
+            It basically checks to make sure that there is no contradictory features.
+            </summary>
+            <param name="other">The feature value.</param>
+            <param name="useDefaults"></param>
+            <param name="varBindings"></param>
+            <returns>
+            	<c>true</c> the sets are compatible, otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:SIL.Machine.FeatureModel.FeatureSymbol">
+            <summary>
+            This class represents a feature value.
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.FeatureModel.FeatureSymbol.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SIL.Machine.FeatureModel.FeatureSymbol"/> class.
+            </summary>
+            <param name="id">The id.</param>
+        </member>
+        <member name="P:SIL.Machine.FeatureModel.FeatureSymbol.Feature">
+            <summary>
+            Gets or sets the feature.
+            </summary>
+            <value>The feature.</value>
+        </member>
+        <member name="T:SIL.Machine.FeatureModel.FeatureSystem">
+            <summary>
+            This class represents a feature system. It encapsulates all of the valid features and symbols.
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.FeatureModel.FeatureSystem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SIL.Machine.FeatureModel.FeatureSystem"/> class.
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.FeatureModel.FeatureSystem.GetSymbol(System.String)">
+            <summary>
+            Gets the feature value associated with the specified ID.
+            </summary>
+            <param name="id">The ID.</param>
+            <returns>The feature value.</returns>
+        </member>
+        <member name="M:SIL.Machine.FeatureModel.FeatureSystem.TryGetSymbol(System.String,SIL.Machine.FeatureModel.FeatureSymbol@)">
+            <summary>
+            Gets the feature value associated with the specified ID.
+            </summary>
+            <param name="id">The ID.</param>
+            <param name="symbol"> </param>
+            <returns>The feature value.</returns>
+        </member>
+        <member name="P:SIL.Machine.FeatureModel.SymbolicFeature.PossibleSymbols">
+            <summary>
+            Gets all possible values.
+            </summary>
+            <value>All possible values.</value>
+        </member>
+        <member name="T:SIL.Machine.FiniteState.Fst`2">
+             <summary>
+             A finite state transducer that works with annotations with feature structures.
+            
+             Note: Deterministic FSTs do not work properly with input annotations that have feature structures with
+             underspecified feature values, i.e. symbolic or string feature values with more than one symbol or string.
+             These underspecified feature values can make the input ambiguous and cause a deterministic FST to have
+             different results than the equivalent non-deterministic FST for the same input. If it is possible
+             for the input to contain underspecified feature values, then a non-deterministic FST should be used.
+             </summary>
+        </member>
+        <member name="T:SIL.Machine.Matching.Constraint`2">
+            <summary>
+            This class represents a simple context in a phonetic pattern. Simple contexts are used to represent
+            natural classes and segments in a pattern.
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Matching.Constraint`2.#ctor(SIL.Machine.FeatureModel.FeatureStruct)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SIL.Machine.Matching.Constraint`2"/> class.
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Matching.Constraint`2.#ctor(SIL.Machine.Matching.Constraint{`0,`1})">
+            <summary>
+            Copy constructor.
+            </summary>
+            <param name="constraint">The annotation constraints.</param>
+        </member>
+        <member name="P:SIL.Machine.Matching.Constraint`2.FeatureStruct">
+            <summary>
+            Gets the feature values.
+            </summary>
+            <value>The feature values.</value>
+        </member>
+        <member name="M:SIL.Machine.Matching.Group`2.#ctor(SIL.Machine.Matching.Group{`0,`1})">
+            <summary>
+            Copy constructor.
+            </summary>
+            <param name="group">The nested pattern.</param>
+        </member>
+        <member name="T:SIL.Machine.Matching.Match`2">
+            <summary>
+            This class represents a match between a phonetic shape and a phonetic pattern.
+            </summary>
+        </member>
+        <member name="T:SIL.Machine.Matching.PatternNode`2">
+            <summary>
+            This is the abstract class that all phonetic pattern nodes extend.
+            </summary>
+        </member>
+        <member name="T:SIL.Machine.Matching.Quantifier`2">
+            <summary>
+            This class represents a nested phonetic pattern within another phonetic pattern.
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Matching.Quantifier`2.#ctor(System.Int32,System.Int32,SIL.Machine.Matching.PatternNode{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SIL.Machine.Matching.Quantifier`2"/> class.
+            </summary>
+            <param name="minOccur">The minimum number of occurrences.</param>
+            <param name="maxOccur">The maximum number of occurrences.</param>
+            <param name="node">The pattern node.</param>
+        </member>
+        <member name="P:SIL.Machine.Matching.Quantifier`2.MinOccur">
+            <summary>
+            Gets the minimum number of occurrences of this pattern.
+            </summary>
+            <value>The minimum number of occurrences.</value>
+        </member>
+        <member name="P:SIL.Machine.Matching.Quantifier`2.MaxOccur">
+            <summary>
+            Gets the maximum number of occurrences of this pattern.
+            </summary>
+            <value>The maximum number of occurrences.</value>
+        </member>
+        <member name="T:SIL.Machine.Morphology.IMorpheme">
+            <summary>
+            This interface represents a morpheme.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Morphology.IMorpheme.Id">
+            <summary>
+            Gets the unique identifier.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Morphology.IMorpheme.Category">
+            <summary>
+            Gets the category or part of speech.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Morphology.IMorpheme.Gloss">
+            <summary>
+            Gets the gloss.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Morphology.IMorpheme.MorphemeType">
+            <summary>
+            Gets the morpheme type.
+            </summary>
+        </member>
+        <member name="T:SIL.Machine.Morphology.WordAnalysis">
+            <summary>
+            This class represents a word analysis.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Morphology.WordAnalysis.Morphemes">
+            <summary>
+            Gets all of the morphemes in the order in which they occur in the word.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Morphology.WordAnalysis.RootMorphemeIndex">
+            <summary>
+            Gets the root morpheme.
+            </summary>
+        </member>
+        <member name="P:SIL.Machine.Morphology.WordAnalysis.Category">
+            <summary>
+            Gets the category or part of speech.
+            </summary>
+        </member>
+        <member name="T:SIL.Machine.Optimization.NelderMeadSimplex">
+            <summary>
+            Class implementing the Nelder-Mead simplex algorithm, used to find a minima when no gradient is available.
+            Called fminsearch() in Matlab. A description of the algorithm can be found at
+            http://se.mathworks.com/help/matlab/math/optimizing-nonlinear-functions.html#bsgpq6p-11
+            or
+            https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Optimization.NelderMeadSimplex.FindMinimum(System.Func{SIL.Machine.Optimization.Vector,System.Int32,System.Double},System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Finds the minimum of the objective function with an intial pertubation
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Optimization.NelderMeadSimplex.InitializeErrorValues(SIL.Machine.Optimization.Vector[],System.Func{SIL.Machine.Optimization.Vector,System.Int32,System.Double})">
+            <summary>
+            Evaluate the objective function at each vertex to create a corresponding
+            list of error values for each vertex
+            </summary>
+            <param name="vertices"></param>
+            <param name="objectiveFunction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SIL.Machine.Optimization.NelderMeadSimplex.HasConverged(System.Double[])">
+            <summary>
+            Check whether the points in the error profile have so little range that we
+            consider ourselves to have converged
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Optimization.NelderMeadSimplex.EvaluateSimplex(System.Double[])">
+            <summary>
+            Examine all error values to determine the ErrorProfile
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Optimization.NelderMeadSimplex.InitializeVertices(SIL.Machine.Optimization.Vector)">
+            <summary>
+            Construct an initial simplex, given starting guesses for the constants, and
+            initial step sizes for each dimension
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Optimization.NelderMeadSimplex.TryToScaleSimplex(System.Double,SIL.Machine.Optimization.NelderMeadSimplex.ErrorProfile,SIL.Machine.Optimization.Vector[],System.Double[],System.Func{SIL.Machine.Optimization.Vector,System.Int32,System.Double},System.Int32)">
+            <summary>
+            Test a scaling operation of the high point, and replace it if it is an improvement
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Optimization.NelderMeadSimplex.ShrinkSimplex(SIL.Machine.Optimization.NelderMeadSimplex.ErrorProfile,SIL.Machine.Optimization.Vector[],System.Double[],System.Func{SIL.Machine.Optimization.Vector,System.Int32,System.Double},System.Int32)">
+            <summary>
+            Contract the simplex uniformly around the lowest point
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Optimization.NelderMeadSimplex.ComputeCentroid(SIL.Machine.Optimization.Vector[],SIL.Machine.Optimization.NelderMeadSimplex.ErrorProfile)">
+            <summary>
+            Compute the centroid of all points except the worst
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Optimization.Vector.Add(SIL.Machine.Optimization.Vector)">
+            <summary>
+            Add another vector to this one
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SIL.Machine.Optimization.Vector.Subtract(SIL.Machine.Optimization.Vector)">
+            <summary>
+            Subtract another vector from this one
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SIL.Machine.Optimization.Vector.Multiply(System.Double)">
+            <summary>
+            Multiply this vector by a scalar value
+            </summary>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SIL.Machine.Optimization.Vector.DotProduct(SIL.Machine.Optimization.Vector)">
+            <summary>
+            Compute the dot product of this vector and the given vector
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SIL.Machine.PunctuationAnalysis.SurrogatePairString">
+            <summary>
+            Class to handle indexing of strings by unicode code point, treating surrogate pairs as single characters.
+            </summary>
+        </member>
+        <member name="F:SIL.Machine.Translation.SymmetrizationHeuristic.Union">
+            <summary>
+            matrix union
+            </summary>
+        </member>
+        <member name="F:SIL.Machine.Translation.SymmetrizationHeuristic.Intersection">
+            <summary>
+            matrix intersection
+            </summary>
+        </member>
+        <member name="F:SIL.Machine.Translation.SymmetrizationHeuristic.Och">
+            <summary>
+            method in "Improved Alignment Models for Statistical Machine Translation" (Och et al., 1999).
+            </summary>
+        </member>
+        <member name="F:SIL.Machine.Translation.SymmetrizationHeuristic.Grow">
+            <summary>
+            "base" method in "Statistical Phrase-Based Translation" (Koehn et al., 2003) without final step.
+            </summary>
+        </member>
+        <member name="F:SIL.Machine.Translation.SymmetrizationHeuristic.GrowDiag">
+            <summary>
+            "diag" method in "Statistical Phrase-Based Translation" (Koehn et al., 2003) without final step.
+            </summary>
+        </member>
+        <member name="F:SIL.Machine.Translation.SymmetrizationHeuristic.GrowDiagFinal">
+            <summary>
+            "diag" method in "Statistical Phrase-Based Translation" (Koehn et al., 2003).
+            </summary>
+        </member>
+        <member name="F:SIL.Machine.Translation.SymmetrizationHeuristic.GrowDiagFinalAnd">
+            <summary>
+            "diag-and" method in "Statistical Phrase-Based Translation" (Koehn et al., 2003).
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Translation.WordAlignmentMatrix.OchSymmetrizeWith(SIL.Machine.Translation.WordAlignmentMatrix)">
+            <summary>
+            Implements the symmetrization method defined in "Improved Alignment Models for Statistical Machine
+            Translation" (Och et al., 1999).
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Translation.WordAlignmentMatrix.GrowSymmetrizeWith(SIL.Machine.Translation.WordAlignmentMatrix)">
+            <summary>
+            Implements the "base" method defined in "Statistical Phrase-Based Translation" (Koehn et al., 2003) without
+            final step.
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Translation.WordAlignmentMatrix.GrowDiagSymmetrizeWith(SIL.Machine.Translation.WordAlignmentMatrix)">
+            <summary>
+            Implements the "diag" method defined in "Statistical Phrase-Based Translation" (Koehn et al., 2003) without
+            final step.
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Translation.WordAlignmentMatrix.GrowDiagFinalSymmetrizeWith(SIL.Machine.Translation.WordAlignmentMatrix)">
+            <summary>
+            Implements the "diag" method defined in "Statistical Phrase-Based Translation" (Koehn et al., 2003).
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Translation.WordAlignmentMatrix.GrowDiagFinalAndSymmetrizeWith(SIL.Machine.Translation.WordAlignmentMatrix)">
+            <summary>
+            Implements the "diag-and" method defined in "Statistical Phrase-Based Translation" (Koehn et al., 2003).
+            </summary>
+        </member>
+        <member name="M:SIL.Machine.Translation.WordGraph.Optimize">
+            <summary>
+            Removes redundant arcs from the word graph.
+            TODO: This seems to affect the results of an interactive translation session, so don't use it yet.
+            </summary>
+            <returns>The optimized word graph.</returns>
+        </member>
+    </members>
+</doc>

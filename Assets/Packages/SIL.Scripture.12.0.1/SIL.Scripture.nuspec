@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>SIL.Scripture</id>
+    <version>12.0.1</version>
+    <authors>SIL International</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/sillsdev/libpalaso</projectUrl>
+    <description>SIL.Scripture provides classes for working with Scripture data such as references and versifications.</description>
+    <releaseNotes>Changes since version 12.0.0
+
+Fixed:
+- [SIL.Windows.Forms] Make `PalasoImage.FromFile(Robustly)` methods more robust
+- [SIL.Windows.Forms] Update dll to `libdl.so.2` to make compatible with Ubuntu 22.x.  Affects multiple projects.
+- [SIL.Core] Fixed `BulkObservableList.MoveRange` method when moving a single item forward.
+
+See full changelog at https://github.com/sillsdev/libpalaso/blob/master/CHANGELOG.md</releaseNotes>
+    <copyright>Copyright © 2010-2023 SIL International</copyright>
+    <repository type="git" url="https://github.com/sillsdev/libpalaso.git" branch="master" commit="21657aa4158f4529fa68864785fa8b92c21bb47a" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1">
+        <dependency id="SIL.Core" version="12.0.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="SIL.Core" version="12.0.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
