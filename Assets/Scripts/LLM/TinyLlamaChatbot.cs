@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
-
 using Unity.InferenceEngine;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +26,7 @@ public class TinyLlamaChatbot : MonoBehaviour
     [SerializeField] private int maxNewTokens = 64;
     [SerializeField] private int maxContextTokens = 512;
 
-    [Header("ONNX/Sentis I/O Names")]
+    [Header("Model I/O Names (match Inspector exactly)")]
     [SerializeField] private string inputIdsName = "input_ids";
     [SerializeField] private string attnMaskName = "attention_mask";
     [SerializeField] private string logitsName = "logits";
@@ -38,52 +37,100 @@ public class TinyLlamaChatbot : MonoBehaviour
     private SilSpmTokenizer _tok;
     private readonly List<int> _context = new();
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void BootProbe() => Debug.Log("[LLM] BootProbe: BeforeSceneLoad");
+
+    void OnEnable() => Debug.Log("[LLM] OnEnable");
+    void Start() => Debug.Log("[LLM] Start()");
+
     void Awake()
     {
-        // 1) tokenizer
-        _tok = new SilSpmTokenizer();
-        _bosId = _tok.BosId; _eosId = _tok.EosId; _padId = _tok.PadId;
+        Debug.Log("[LLM] Awake: begin");
 
-        // 2) load .sentis from StreamingAssets 
-        var path = Path.Combine(Application.streamingAssetsPath, sentisFileName);
-        if (!File.Exists(path))
-            throw new FileNotFoundException($".sentis model not found: {path}");
-        _model = ModelLoader.Load(path);
-        _worker = new Worker(_model, BackendType.CPU);
+        if (sendBtn == null) Debug.LogError("[LLM] sendBtn is NOT assigned in Inspector");
+        if (input == null) Debug.LogError("[LLM] input (TMP_InputField) is NOT assigned in Inspector");
+        if (chatView == null) Debug.LogWarning("[LLM] chatView is NOT assigned, logs will go Console only");
 
-        if (!System.IO.File.Exists(path))   // Debug use
+        try
         {
-            foreach (var f in System.IO.Directory.GetFiles(Application.streamingAssetsPath, "*.sentis"))
-                Debug.Log("[LLM] found: " + f);
-            throw new System.IO.FileNotFoundException(".sentis model not found: " + path);
+            // 1) tokenizer
+            _tok = new SilSpmTokenizer();
+            _bosId = _tok.BosId; _eosId = _tok.EosId; _padId = _tok.PadId;
+            Debug.Log($"[LLM] Tokenizer ready. BOS={_bosId} EOS={_eosId} PAD={_padId}");
+
+            // 2) load .sentis
+            var baseDir = Application.streamingAssetsPath;
+            var path = Path.Combine(baseDir, sentisFileName);
+            Debug.Log($"[LLM] streamingAssetsPath = {baseDir}");
+            Debug.Log($"[LLM] expecting .sentis   = {sentisFileName}");
+            foreach (var f in Directory.GetFiles(baseDir, "*.sentis")) Debug.Log("[LLM] found .sentis = " + f);
+
+            if (!File.Exists(path))
+                throw new FileNotFoundException($".sentis model not found: {path}");
+
+            _model = ModelLoader.Load(path);
+            _worker = new Worker(_model, BackendType.CPU); //use CPU first, then switch to GPUCompute
+            Debug.Log("[LLM] Model loaded & Worker created (CPU)");
+
+            // 3) bind UI & callback
+            if (sendBtn != null)
+                sendBtn.onClick.AddListener(OnSend);
+            LogLine("Chatbot ready. Type and click Send.");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("[LLM] Awake failed: " + ex);
         }
 
-        // 3) bond UI
-        sendBtn.onClick.AddListener(OnSend);
-        LogLine("Chatbot ready. Type and click Send.");
+        Debug.Log("[LLM] Awake: end");
     }
 
     void OnDestroy()
     {
+        Debug.Log("[LLM] OnDestroy");
         _worker?.Dispose();
         _tok?.Dispose();
     }
 
+    void LogLine(string s)
+    {
+        Debug.Log("[LLM] " + s);
+        if (chatView) chatView.text += s + "\n";
+    }
+
     void OnSend()
     {
-        var userText = input.text?.Trim();
-        if (string.IsNullOrEmpty(userText)) return;
-        input.text = "";
-        LogLine($"{userText}");
+        Debug.Log("[LLM] OnSend clicked");
+        var userText = input != null ? input.text?.Trim() : null;
+        if (string.IsNullOrEmpty(userText)) { LogLine("(empty input)"); return; }
+
+        // fake ping command for testing responsiveness
+        if (userText.Equals("/ping", StringComparison.OrdinalIgnoreCase))
+        {
+            LogLine("/ping");
+            LogLine("pong");
+            if (input) input.text = "";
+            return;
+        }
+
+        LogLine(userText);
+        if (input) input.text = "";
         _ = GenerateAndShowAsync(userText);
     }
 
     async Task GenerateAndShowAsync(string userText)
     {
-        var promptTokens = BuildPromptTokens(userText);
-        var newTokens = await Task.Run(() => GenerateTokens(promptTokens, maxNewTokens));
-        var reply = _tok.Decode(newTokens.ToArray());
-        LogLine($"{reply}");
+        try
+        {
+            var promptTokens = BuildPromptTokens(userText);
+            var newTokens = await Task.Run(() => GenerateTokens(promptTokens, maxNewTokens));
+            var reply = _tok.Decode(newTokens.ToArray());
+            LogLine(reply);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("[LLM] GenerateAndShowAsync failed: " + ex);
+        }
     }
 
     List<int> BuildPromptTokens(string userText)
@@ -111,28 +158,52 @@ public class TinyLlamaChatbot : MonoBehaviour
             var maskArr64 = Enumerable.Repeat(1L, seqLen).ToArray();
 
             using var inputIds = new Tensor<long>(new TensorShape(1, seqLen), idsArr64);
-            using var attnMask = new Tensor<long>(new TensorShape(1, seqLen), maskArr64);
-
             _worker.SetInput(inputIdsName, inputIds);
+
             if (!string.IsNullOrEmpty(attnMaskName))
+            {
+                using var attnMask = new Tensor<long>(new TensorShape(1, seqLen), maskArr64);
                 _worker.SetInput(attnMaskName, attnMask);
+            }
 
             _worker.Schedule();
 
-            var logitsTensor = _worker.PeekOutput(logitsName) as Tensor<float>;
-            if (logitsTensor == null) { Debug.LogError($"[LLM] Output '{logitsName}' not found or wrong type"); return newTokens; }
+            var logitsTensor = _worker.PeekOutput(logitsName) as Tensor<float>
+                               ?? _worker.PeekOutput() as Tensor<float>;
+
+            if (logitsTensor == null)
+            {
+                Debug.LogError($"[LLM] Output '{logitsName}' not found & default null.");
+                return newTokens;
+            }
 
             logitsTensor.CompleteAllPendingOperations();
             var raw = logitsTensor.DownloadToArray();
-            var shape = logitsTensor.shape; // [1, seq, vocab]
-            int vocab = shape[2];
 
-            int start = (seqLen - 1) * vocab;
+            var s = logitsTensor.shape;
+            var sArr = s.ToArray();
+            Debug.Log($"[LLM] step={step} logits shape=({string.Join(",", sArr)}) len={raw.Length}");
+
+            int rank = s.rank;
+            int vocab = s[-1];
+            int timeIndex = (rank >= 3 && s[1] > 1) ? (seqLen - 1) : 0;
+
+            int start = timeIndex * vocab;
+            if (start + vocab > raw.Length)
+            {
+                Debug.LogError($"[LLM] bad slice: start={start}, vocab={vocab}, rawLen={raw.Length}");
+                return newTokens;
+            }
+
             var lastLogits = new float[vocab];
             Array.Copy(raw, start, lastLogits, 0, vocab);
 
+            if (step == 0 && _eosId >= 0 && _eosId < lastLogits.Length)
+                lastLogits[_eosId] = float.NegativeInfinity;
+
             int nextId = SampleFromLogits(lastLogits, temperature, topK, topP);
             if (_eosId >= 0 && nextId == _eosId) break;
+
             newTokens.Add(nextId);
             workSeq.Add(nextId);
         }
@@ -173,11 +244,5 @@ public class TinyLlamaChatbot : MonoBehaviour
         float r = UnityEngine.Random.Range(0f, total), acc = 0f;
         for (int i = 0; i < cut; i++) { acc += scaled[i]; if (r <= acc) return idx[i]; }
         return idx[0];
-    }
-
-    void LogLine(string s)
-    {
-        if (chatView) chatView.text += s + "\n";
-        else Debug.Log(s);
     }
 }
