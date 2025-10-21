@@ -5,29 +5,30 @@ using System.Threading.Tasks;
 using Unity.InferenceEngine;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [DisallowMultipleComponent]
 public class TinyLlamaChatbot : MonoBehaviour
 {
     [Header("UI")]
-    public InputField input;
-    public Button sendBtn;
-    public Text chatView;
+    [SerializeField] private TMP_InputField input;
+    [SerializeField] private Button sendBtn;
+    [SerializeField] private TextMeshProUGUI chatView;
 
-    [Header("Model (assign .onnx asset here)")]
-    public ModelAsset modelAsset;
+    [Header(".onnx Model")]
+    [SerializeField] private ModelAsset modelAsset;
 
     [Header("Gen Settings")]
-    [Range(0.2f, 2.0f)] public float temperature = 0.9f;
-    [Range(0, 100)] public int topK = 40;
-    [Range(0.0f, 1.0f)] public float topP = 0.9f;
-    public int maxNewTokens = 64;
-    public int maxContextTokens = 512;
+    [Range(0.2f, 2.0f)] [SerializeField] private float temperature = 0.9f;
+    [Range(0, 100)] [SerializeField] private int topK = 40;
+    [Range(0.0f, 1.0f)] [SerializeField] private float topP = 0.9f;
+    [SerializeField] private int maxNewTokens = 64;
+    [SerializeField] private int maxContextTokens = 512;
 
     [Header("ONNX I/O Names")]
-    public string inputIdsName = "input_ids";
-    public string attnMaskName = "attention_mask";
-    public string logitsName = "logits";
+    [SerializeField] private string inputIdsName = "input_ids";
+    [SerializeField] private string attnMaskName = "attention_mask";
+    [SerializeField] private string logitsName = "logits";
 
     private int _bosId, _eosId, _padId;
     private Model _model;
