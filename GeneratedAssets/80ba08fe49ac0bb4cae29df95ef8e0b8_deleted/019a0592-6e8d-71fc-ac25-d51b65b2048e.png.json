@@ -1,0 +1,20 @@
+{
+    "asset": "80ba08fe49ac0bb4cae29df95ef8e0b8",
+    "fileName": "019a0592-6e8d-71fc-ac25-d51b65b2048e.png",
+    "prompt": "Create a Japanese schoolgirl wearing a traditional sailor-style school uniform. The character should have a well-designed, detailed, and polished appearance. She should have a slender yet curvy figure, short flowing hair, large breast, slim body. The uniform should include a navy-blue skirt, a white blouse with a sailor collar, and a red necktie. The art style should be reality-inspired, vibrant, and visually sexy",
+    "negativePrompt": "",
+    "model": "523e57fc-24e6-44e9-88df-2789ce648de4",
+    "modelName": "Realistic Fashion",
+    "customSeed": -1,
+    "w3CTraceId": "477d8c0e36a5bf625fe1daca0ab98f4c",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

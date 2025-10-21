@@ -1,0 +1,13 @@
+{
+    "asset": "d7a32a51d0a8b9043bb0add38c989873",
+    "fileName": "019a05f1-29e7-71d1-a99f-f4626b8ecf34.wav",
+    "prompt": "sword slay",
+    "negativePrompt": "",
+    "model": "0ee39b33-2893-4e0f-8c46-0e0bdd4eda85",
+    "modelName": "Text to Sound",
+    "customSeed": -1,
+    "w3CTraceId": "c7508cd8df47e7f025d13de2d61a12c4",
+    "duration": 10.0,
+    "autoTrim": false,
+    "hasReference": false
+}

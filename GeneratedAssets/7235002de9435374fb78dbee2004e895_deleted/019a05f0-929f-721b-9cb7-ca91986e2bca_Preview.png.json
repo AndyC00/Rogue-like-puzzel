@@ -1,0 +1,11 @@
+{
+    "asset": "7235002de9435374fb78dbee2004e895",
+    "fileName": "019a05f0-929f-721b-9cb7-ca91986e2bca_Preview.png",
+    "prompt": "stone",
+    "negativePrompt": "",
+    "model": "575ecf67-4425-4939-97b9-5e138b8ee234",
+    "modelName": "Unity Texture2D",
+    "customSeed": 971831787,
+    "w3CTraceId": "e750f3be2b7963f1ad8138652bedfb28",
+    "refinementMode": "Generation"
+}

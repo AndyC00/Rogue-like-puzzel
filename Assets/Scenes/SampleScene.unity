@@ -1159,7 +1159,7 @@ MonoBehaviour:
   input: {fileID: 1018232842}
   sendBtn: {fileID: 1526517937}
   chatView: {fileID: 1610240593}
-  modelAsset: {fileID: 0}
+  modelAsset: {fileID: 5022602860645237092, guid: 8223c81f0310a2845b0b1342509b4a89, type: 3}
   temperature: 0.9
   topK: 40
   topP: 0.9

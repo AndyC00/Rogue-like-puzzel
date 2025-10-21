@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+
 using Unity.InferenceEngine;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,17 +17,17 @@ public class TinyLlamaChatbot : MonoBehaviour
     [SerializeField] private Button sendBtn;
     [SerializeField] private TextMeshProUGUI chatView;
 
-    [Header(".onnx Model")]
-    [SerializeField] private ModelAsset modelAsset;
+    [Header("Runtime Model (.sentis in StreamingAssets)")]
+    [SerializeField] private string sentisFileName = "tinyllama_fp16.sentis";
 
     [Header("Gen Settings")]
-    [Range(0.2f, 2.0f)] [SerializeField] private float temperature = 0.9f;
-    [Range(0, 100)] [SerializeField] private int topK = 40;
-    [Range(0.0f, 1.0f)] [SerializeField] private float topP = 0.9f;
+    [Range(0.2f, 2.0f)][SerializeField] private float temperature = 0.9f;
+    [Range(0, 100)][SerializeField] private int topK = 40;
+    [Range(0.0f, 1.0f)][SerializeField] private float topP = 0.9f;
     [SerializeField] private int maxNewTokens = 64;
     [SerializeField] private int maxContextTokens = 512;
 
-    [Header("ONNX I/O Names")]
+    [Header("ONNX/Sentis I/O Names")]
     [SerializeField] private string inputIdsName = "input_ids";
     [SerializeField] private string attnMaskName = "attention_mask";
     [SerializeField] private string logitsName = "logits";
@@ -42,12 +44,14 @@ public class TinyLlamaChatbot : MonoBehaviour
         _tok = new SilSpmTokenizer();
         _bosId = _tok.BosId; _eosId = _tok.EosId; _padId = _tok.PadId;
 
-        // 2) load model via ModelAsset
-        if (modelAsset == null) throw new Exception("Assign ModelAsset (.onnx) in Inspector.");
-        _model = ModelLoader.Load(modelAsset);
-        _worker = new Worker(_model, BackendType.CPU);
+        // 2) load .sentis from StreamingAssets 
+        var path = Path.Combine(Application.streamingAssetsPath, sentisFileName);
+        if (!File.Exists(path))
+            throw new FileNotFoundException($".sentis model not found: {path}");
+        _model = ModelLoader.Load(path);
+        _worker = new Worker(_model, BackendType.GPUCompute);
 
-        // 3) UI
+        // 3) bond UI
         sendBtn.onClick.AddListener(OnSend);
         LogLine("✅ Chatbot ready. Type and click Send.");
     }
@@ -99,11 +103,13 @@ public class TinyLlamaChatbot : MonoBehaviour
             var idsArr = workSeq.ToArray();
             var maskArr = Enumerable.Repeat(1, seqLen).ToArray();
 
-            using var inputIds = new Tensor<int>(new TensorShape(new[] { 1, seqLen }), idsArr);
-            using var attnMask = new Tensor<int>(new TensorShape(new[] { 1, seqLen }), maskArr);
+            using var inputIds = new Tensor<int>(new TensorShape(1, seqLen), idsArr);
+            using var attnMask = new Tensor<int>(new TensorShape(1, seqLen), maskArr);
 
             _worker.SetInput(inputIdsName, inputIds);
-            _worker.SetInput(attnMaskName, attnMask);
+            if (!string.IsNullOrEmpty(attnMaskName))
+                _worker.SetInput(attnMaskName, attnMask);
+
             _worker.Schedule();
 
             var logitsTensor = _worker.PeekOutput(logitsName) as Tensor<float>;
