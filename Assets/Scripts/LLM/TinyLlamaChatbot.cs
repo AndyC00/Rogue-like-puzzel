@@ -18,7 +18,7 @@ public class TinyLlamaChatbot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI chatView;
 
     [Header("Runtime Model (.sentis in StreamingAssets)")]
-    [SerializeField] private string sentisFileName = "tinyllama_fp16.sentis";
+    [SerializeField] private string sentisFileName = "model_fp16.sentis";
 
     [Header("Gen Settings")]
     [Range(0.2f, 2.0f)][SerializeField] private float temperature = 0.9f;
@@ -49,11 +49,18 @@ public class TinyLlamaChatbot : MonoBehaviour
         if (!File.Exists(path))
             throw new FileNotFoundException($".sentis model not found: {path}");
         _model = ModelLoader.Load(path);
-        _worker = new Worker(_model, BackendType.GPUCompute);
+        _worker = new Worker(_model, BackendType.CPU);
+
+        if (!System.IO.File.Exists(path))   // Debug use
+        {
+            foreach (var f in System.IO.Directory.GetFiles(Application.streamingAssetsPath, "*.sentis"))
+                Debug.Log("[LLM] found: " + f);
+            throw new System.IO.FileNotFoundException(".sentis model not found: " + path);
+        }
 
         // 3) bond UI
         sendBtn.onClick.AddListener(OnSend);
-        LogLine("✅ Chatbot ready. Type and click Send.");
+        LogLine("Chatbot ready. Type and click Send.");
     }
 
     void OnDestroy()
@@ -67,7 +74,7 @@ public class TinyLlamaChatbot : MonoBehaviour
         var userText = input.text?.Trim();
         if (string.IsNullOrEmpty(userText)) return;
         input.text = "";
-        LogLine($"👤 {userText}");
+        LogLine($"{userText}");
         _ = GenerateAndShowAsync(userText);
     }
 
@@ -76,7 +83,7 @@ public class TinyLlamaChatbot : MonoBehaviour
         var promptTokens = BuildPromptTokens(userText);
         var newTokens = await Task.Run(() => GenerateTokens(promptTokens, maxNewTokens));
         var reply = _tok.Decode(newTokens.ToArray());
-        LogLine($"🤖 {reply}");
+        LogLine($"{reply}");
     }
 
     List<int> BuildPromptTokens(string userText)
@@ -100,11 +107,11 @@ public class TinyLlamaChatbot : MonoBehaviour
         {
             int seqLen = workSeq.Count;
 
-            var idsArr = workSeq.ToArray();
-            var maskArr = Enumerable.Repeat(1, seqLen).ToArray();
+            var idsArr64 = workSeq.Select(i => (long)i).ToArray();
+            var maskArr64 = Enumerable.Repeat(1L, seqLen).ToArray();
 
-            using var inputIds = new Tensor<int>(new TensorShape(1, seqLen), idsArr);
-            using var attnMask = new Tensor<int>(new TensorShape(1, seqLen), maskArr);
+            using var inputIds = new Tensor<long>(new TensorShape(1, seqLen), idsArr64);
+            using var attnMask = new Tensor<long>(new TensorShape(1, seqLen), maskArr64);
 
             _worker.SetInput(inputIdsName, inputIds);
             if (!string.IsNullOrEmpty(attnMaskName))
@@ -113,6 +120,8 @@ public class TinyLlamaChatbot : MonoBehaviour
             _worker.Schedule();
 
             var logitsTensor = _worker.PeekOutput(logitsName) as Tensor<float>;
+            if (logitsTensor == null) { Debug.LogError($"[LLM] Output '{logitsName}' not found or wrong type"); return newTokens; }
+
             logitsTensor.CompleteAllPendingOperations();
             var raw = logitsTensor.DownloadToArray();
             var shape = logitsTensor.shape; // [1, seq, vocab]

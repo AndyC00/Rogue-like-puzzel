@@ -1159,7 +1159,7 @@ MonoBehaviour:
   input: {fileID: 1018232842}
   sendBtn: {fileID: 1526517937}
   chatView: {fileID: 1610240593}
-  modelAsset: {fileID: 5022602860645237092, guid: 8223c81f0310a2845b0b1342509b4a89, type: 3}
+  sentisFileName: model_fp16.sentis
   temperature: 0.9
   topK: 40
   topP: 0.9
@@ -1346,7 +1346,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
