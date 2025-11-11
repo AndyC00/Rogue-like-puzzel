@@ -153,18 +153,21 @@ public class TinyLlamaChatbot : MonoBehaviour
         for (int step = 0; step < maxToGen; step++)
         {
             int seqLen = workSeq.Count;
-
             var idsArr64 = workSeq.Select(i => (long)i).ToArray();
             var maskArr64 = Enumerable.Repeat(1L, seqLen).ToArray();
 
-            using var inputIds = new Tensor<long>(new TensorShape(1, seqLen), idsArr64);
-            _worker.SetInput(inputIdsName, inputIds);
+            using var inputIdsTensor = new Tensor<long>(new TensorShape(1, seqLen), idsArr64);
+            _worker.SetInput(inputIdsName, inputIdsTensor);
 
             if (!string.IsNullOrEmpty(attnMaskName))
             {
-                using var attnMask = new Tensor<long>(new TensorShape(1, seqLen), maskArr64);
-                _worker.SetInput(attnMaskName, attnMask);
+                using var maskTensor = new Tensor<long>(new TensorShape(1, seqLen), maskArr64);
+                _worker.SetInput(attnMaskName, maskTensor);
             }
+
+            _worker.SetInputShapeDimension(inputIdsName, 1, seqLen);
+            if (!string.IsNullOrEmpty(attnMaskName))
+                _worker.SetInputShapeDimension(attnMaskName, 1, seqLen);
 
             _worker.Schedule();
 
